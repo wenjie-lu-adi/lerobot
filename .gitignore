@@ -75,8 +75,8 @@ coverage.xml
 
 # Ignore .cache except calibration
 .cache/*
-!.cache/calibration/
-!.cache/calibration/**
+# !.cache/calibration/
+# !.cache/calibration/**
 
 # Translations
 *.mo
@@ -153,3 +153,6 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# my own stuff
+sandbox
