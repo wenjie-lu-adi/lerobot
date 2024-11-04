@@ -455,7 +455,7 @@ def create_lerobot_dataset(dataset, run_compute_stats, push_to_hub, tags, play_s
 
     if run_compute_stats:
         log_say("Computing dataset statistics", play_sounds)
-        lerobot_dataset.stats = compute_stats(lerobot_dataset)
+        lerobot_dataset.stats = compute_stats(lerobot_dataset, num_workers=4)
     else:
         logging.info("Skipping computation of the dataset statistics")
         lerobot_dataset.stats = {}
