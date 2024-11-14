@@ -1,0 +1,30 @@
+eval:
+  n_episodes: 12
+  batch_size: 1
+  use_async_envs: false
+
+env:
+  name: pusht
+  task: PushT-v0
+  image_size: 96
+  state_dim: 2
+  action_dim: 2
+  fps: 10
+  episode_length: 300
+  gym:
+    obs_type: pixels_agent_pos
+    render_mode: rgb_array #human for human control with visualization
+    visualization_width: 384
+    visualization_height: 384
+    success_threshold: 0.95
+    randomize: false
+
+# for saving name
+policy:
+  name: ACT
+  n_obs_steps: 2
+  n_action_steps: 4
+
+device: cuda
+use_amp: false
+seed: 100000
