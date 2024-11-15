@@ -308,6 +308,19 @@ def load_previous_and_future_frames(
 
     return item
 
+def aggregate_episode_data_index(lerobot_datasets):
+    """
+    Aggregate episode data index from multiple Lerobot datasets.
+    Args:
+        lerobot_datasets: A list of Lerobot datasets.
+    """
+    start_idx = lerobot_datasets[0].num_samples
+    aggregateed = {"from": lerobot_datasets[0].episode_data_index["from"], "to": lerobot_datasets[0].episode_data_index["to"]}
+    for ds in lerobot_datasets[1:]:
+        aggregateed["from"] = torch.cat((aggregateed["from"], ds.episode_data_index["from"] + start_idx))
+        aggregateed["to"] = torch.cat((aggregateed["to"], ds.episode_data_index["to"] + start_idx))
+        start_idx += ds.num_samples
+    return aggregateed
 
 def calculate_episode_data_index(hf_dataset: datasets.Dataset) -> Dict[str, torch.Tensor]:
     """

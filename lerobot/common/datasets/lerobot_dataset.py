@@ -32,6 +32,7 @@ from lerobot.common.datasets.utils import (
     load_stats,
     load_videos,
     reset_episode_index,
+    aggregate_episode_data_index,
 )
 from lerobot.common.datasets.video_utils import VideoFrame, load_from_videos
 
@@ -278,7 +279,10 @@ class MultiLeRobotDataset(torch.utils.data.Dataset):
         self.split = split
         self.image_transforms = image_transforms
         self.delta_timestamps = delta_timestamps
-        self.stats = aggregate_stats(self._datasets)
+        self.stats = aggregate_stats(self._datasets)    
+
+        self.episode_data_index = aggregate_episode_data_index(self._datasets)
+        
 
     @property
     def repo_id_to_index(self):
