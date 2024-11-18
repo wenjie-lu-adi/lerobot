@@ -98,6 +98,7 @@ class Logger:
 
         # Set up WandB.
         self._group = cfg_to_group(cfg)
+        self._group = re.sub(r'\[.*?\]', '', self._group).strip() # remove dataet [xxx, xxx] in multi-dataset environment
         project = cfg.get("wandb", {}).get("project")
         entity = cfg.get("wandb", {}).get("entity")
         enable_wandb = cfg.get("wandb", {}).get("enable", False)
