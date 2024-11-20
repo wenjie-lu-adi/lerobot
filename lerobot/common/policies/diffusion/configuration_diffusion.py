@@ -147,6 +147,14 @@ class DiffusionConfig:
     prediction_type: str = "epsilon"
     clip_sample: bool = True
     clip_sample_range: float = 1.0
+    # Transformer
+    backbone: str = "unet"
+    n_layer: int = 8
+    n_head: int = 4
+    p_drop_emb: float = 0.0
+    p_drop_attn: float = 0.3
+    causal_attn: bool = True
+    n_cond_layers: int = 0
 
     # Inference
     num_inference_steps: int | None = None
@@ -202,7 +210,7 @@ class DiffusionConfig:
         # Check that the horizon size and U-Net downsampling is compatible.
         # U-Net downsamples by 2 with each stage.
         downsampling_factor = 2 ** len(self.down_dims)
-        if self.horizon % downsampling_factor != 0:
+        if self.backbone=="unet" and self.horizon % downsampling_factor != 0:
             raise ValueError(
                 "The horizon should be an integer multiple of the downsampling factor (which is determined "
                 f"by `len(down_dims)`). Got {self.horizon=} and {self.down_dims=}"
