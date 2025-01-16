@@ -114,13 +114,17 @@ class Logger:
             if cfg.resume:
                 wandb_run_id = get_wandb_run_id_from_filesystem(self.checkpoints_dir)
 
+            ### TODO
+            tags = cfg_to_group(cfg, return_list=True)
+            del tags[1]
+            ###
             wandb.init(
                 id=wandb_run_id,
                 project=project,
                 entity=entity,
                 name=wandb_job_name,
                 notes=cfg.get("wandb", {}).get("notes"),
-                tags=cfg_to_group(cfg, return_list=True),
+                tags=tags,
                 dir=log_dir,
                 config=OmegaConf.to_container(cfg, resolve=True),
                 # TODO(rcadene): try set to True
