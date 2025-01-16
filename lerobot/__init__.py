@@ -181,8 +181,8 @@ available_real_world_datasets = [
     "lerobot/usc_cloth_sim",
 ]
 
-available_datasets = list(
-    itertools.chain(*available_datasets_per_env.values(), available_real_world_datasets)
+available_datasets = sorted(
+    set(itertools.chain(*available_datasets_per_env.values(), available_real_world_datasets))
 )
 
 # lists all available policies from `lerobot/common/policies`
@@ -198,6 +198,8 @@ available_robots = [
     "koch",
     "koch_bimanual",
     "aloha",
+    "so100",
+    "moss",
 ]
 
 # lists all available cameras from `lerobot/common/robot_devices/cameras`
@@ -209,6 +211,7 @@ available_cameras = [
 # lists all available motors from `lerobot/common/robot_devices/motors`
 available_motors = [
     "dynamixel",
+    "feetech",
 ]
 
 # keys and values refer to yaml files
